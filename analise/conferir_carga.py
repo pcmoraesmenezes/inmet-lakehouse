@@ -1,11 +1,11 @@
 """Confere a carga de um ano contra os CSV: linhas, estacoes e, por coluna, contagem e soma."""
 import argparse
 import csv
-import os
 import sys
 
 import psycopg
 
+from etl.conexao import abrir
 from etl.extrair import ler_bruto, listar_arquivos
 from etl.transformar import COLUNAS_MEDIDA
 
@@ -39,10 +39,8 @@ def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("anos", type=int, nargs="+")
     anos = parser.parse_args().anos
-    conexao = dict(host="127.0.0.1", port=5440, dbname="inmet_dw",
-                   user=os.environ["PG_USER"], password=os.environ["PG_PASSWORD"])
     falhou = False
-    with psycopg.connect(**conexao) as dw, dw.cursor() as cur:
+    with abrir() as dw, dw.cursor() as cur:
         for ano in anos:
             csv_linhas, csv_est, csv_cont, csv_soma = do_csv(ano)
             db_linhas, db_est, db_cont, db_soma = do_banco(cur, ano)

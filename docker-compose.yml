@@ -17,5 +17,21 @@ services:
       interval: 5s
       retries: 10
 
+  etl:
+    build: .
+    container_name: inmet_etl
+    depends_on:
+      postgres:
+        condition: service_healthy
+    environment:
+      PG_HOST: postgres
+      PG_PORT: "5432"
+      PG_DB: inmet_sim
+      PG_USER: ${PG_USER}
+      PG_PASSWORD: ${PG_PASSWORD}
+      PYTHONUNBUFFERED: "1"
+    volumes:
+      - ./work/csv_mg:/app/work/csv_mg:ro
+
 volumes:
   pgdata:

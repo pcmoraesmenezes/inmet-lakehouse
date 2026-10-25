@@ -1,0 +1,10 @@
+.git
+.venv
+.env
+raw
+work
+analise
+ingest
+db
+__pycache__
+*.pyc

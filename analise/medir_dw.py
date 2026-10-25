@@ -1,10 +1,10 @@
 """Mede o DW rigido: tamanho, reprocessamento da menor unidade e consultas por dia."""
-import os
 import re
 import time
 
 import psycopg
 
+from etl.conexao import abrir
 from etl.extrair import CSV_MG
 from etl.rodar import processar
 
@@ -21,9 +21,7 @@ def tempo_da_consulta(cur: psycopg.Cursor, sql: str, params: tuple) -> float:
 
 
 def main() -> None:
-    conexao = dict(host="127.0.0.1", port=5440, dbname="inmet_dw",
-                   user=os.environ["PG_USER"], password=os.environ["PG_PASSWORD"])
-    with psycopg.connect(**conexao) as dw, psycopg.connect(**conexao, autocommit=True) as ctl:
+    with abrir() as dw, abrir(autocommit=True) as ctl:
         cur = dw.cursor()
         cur.execute("SELECT count(*), pg_size_pretty(pg_relation_size('dw.medicao')), "
                     "pg_size_pretty(pg_indexes_size('dw.medicao')), pg_size_pretty(pg_database_size(current_database())) "

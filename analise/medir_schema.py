@@ -1,17 +1,13 @@
 """Mede o custo de mudar o schema da medicao, numa copia descartavel para nao tocar o baseline."""
-import os
 import threading
 import time
 
 import psycopg
 
+from etl.conexao import abrir
+
 COPIA = "dw.medicao_teste"
 ESPERA_LEITOR_S = 1.0
-
-
-def conexao() -> psycopg.Connection:
-    return psycopg.connect(host="127.0.0.1", port=5440, dbname="inmet_dw",
-                           user=os.environ["PG_USER"], password=os.environ["PG_PASSWORD"], autocommit=True)
 
 
 def medir(rotulo: str, ctl: psycopg.Connection, sql: str) -> float:
@@ -34,7 +30,7 @@ def troca_de_tipo_com_leitor(ctl: psycopg.Connection) -> None:
 
     def leitor() -> None:
         time.sleep(ESPERA_LEITOR_S)
-        with conexao() as outra:
+        with abrir(autocommit=True) as outra:
             inicio = time.perf_counter()
             outra.execute(f"SELECT count(*) FROM {COPIA} WHERE cod = 'A502'").fetchone()
             espera.append(time.perf_counter() - inicio)
@@ -48,7 +44,7 @@ def troca_de_tipo_com_leitor(ctl: psycopg.Connection) -> None:
 
 
 def main() -> None:
-    with conexao() as ctl:
+    with abrir(autocommit=True) as ctl:
         ctl.execute(f"DROP TABLE IF EXISTS {COPIA}")
         try:
             medir("copiar a medicao para a tabela de teste", ctl, f"CREATE TABLE {COPIA} (LIKE dw.medicao INCLUDING ALL)")
