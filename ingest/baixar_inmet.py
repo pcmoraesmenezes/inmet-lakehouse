@@ -1,4 +1,4 @@
-"""Baixa os zips anuais do INMET para a bronze e registra cada download no manifesto."""
+"""Baixa os zips anuais do INMET para o raw e registra cada download no manifesto."""
 import hashlib
 import json
 import sys
@@ -7,15 +7,15 @@ from datetime import datetime, timezone
 from pathlib import Path
 
 RAIZ = Path(__file__).resolve().parent.parent
-BRONZE = RAIZ / "bronze"
-MANIFESTO = BRONZE / "manifest.jsonl"
+RAW = RAIZ / "raw"
+MANIFESTO = RAW / "manifest.jsonl"
 URL = "https://portal.inmet.gov.br/uploads/dadoshistoricos/{ano}.zip"
 BLOCO = 1 << 20
 
 
 def baixar(ano: int) -> dict:
     agora = datetime.now(timezone.utc)
-    destino = BRONZE / "zips" / str(ano) / f"{agora:%Y%m%dT%H%M%SZ}.zip"
+    destino = RAW / "zips" / str(ano) / f"{agora:%Y%m%dT%H%M%SZ}.zip"
     destino.parent.mkdir(parents=True, exist_ok=True)
     pedido = urllib.request.Request(URL.format(ano=ano), headers={"User-Agent": "Mozilla/5.0"})
     sha = hashlib.sha256()
@@ -41,7 +41,7 @@ def baixar(ano: int) -> dict:
 
 
 def main(anos: list[int]) -> None:
-    BRONZE.mkdir(exist_ok=True)
+    RAW.mkdir(exist_ok=True)
     for ano in anos:
         registro = baixar(ano)
         with MANIFESTO.open("a", encoding="utf-8") as fh:

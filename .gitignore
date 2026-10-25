@@ -1,4 +1,4 @@
-bronze/*
-!bronze/manifest.jsonl
+raw/*
+!raw/manifest.jsonl
 .venv/
 __pycache__/
