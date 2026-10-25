@@ -6,8 +6,7 @@ import urllib.request
 from datetime import datetime, timezone
 from pathlib import Path
 
-RAIZ = Path(__file__).resolve().parent.parent
-RAW = RAIZ / "raw"
+RAW = Path("/Volumes/workspace/inmet/raw")
 MANIFESTO = RAW / "manifest.jsonl"
 URL = "https://portal.inmet.gov.br/uploads/dadoshistoricos/{ano}.zip"
 BLOCO = 1 << 20
@@ -32,7 +31,7 @@ def baixar(ano: int) -> dict:
     return {
         "ano": ano,
         "url": URL.format(ano=ano),
-        "arquivo": str(destino.relative_to(RAIZ)),
+        "arquivo": str(destino.relative_to('/Volumes/workspace/inmet/raw')),
         "bytes": tamanho,
         "sha256": sha.hexdigest(),
         "last_modified": ultima_mod,
@@ -44,10 +43,12 @@ def main(anos: list[int]) -> None:
     RAW.mkdir(exist_ok=True)
     for ano in anos:
         registro = baixar(ano)
-        with MANIFESTO.open("a", encoding="utf-8") as fh:
-            fh.write(json.dumps(registro, ensure_ascii=False) + "\n")
+        linhas = MANIFESTO.read_text(encoding="utf-8") if MANIFESTO.exists() else ""
+        tmp = MANIFESTO.with_name(MANIFESTO.name + ".tmp")
+        tmp.write_text(linhas + json.dumps(registro, ensure_ascii=False) + "\n", encoding="utf-8")
+        tmp.replace(MANIFESTO)
         print(f"{ano}: {registro['bytes']} bytes, sha256 {registro['sha256'][:16]}, Last-Modified {registro['last_modified']}")
 
 
 if __name__ == "__main__":
-    main([int(a) for a in sys.argv[1:]])
+    main([int(a) for a in sys.argv[1:] if a.lstrip("-").isdigit()])
