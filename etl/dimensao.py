@@ -4,7 +4,7 @@ import pandas as pd
 from analise import geo
 
 LIMITE_POSICAO_M = 100
-LIMITE_ALTITUDE_M = 10
+LIMITE_ALTITUDE_M = 50
 
 
 def nativo(valor):
