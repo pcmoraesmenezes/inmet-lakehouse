@@ -1,4 +1,4 @@
-"""Transforma: converte o texto bruto nos tipos do DW rigido, assumindo o formato V1."""
+"""Transforma: converte o texto bruto nos tipos do DW rigido, nos formatos V1, V2 e V3."""
 from datetime import datetime
 
 COLUNAS_MEDIDA = [
@@ -7,6 +7,8 @@ COLUNAS_MEDIDA = [
     "temp_orvalho_min_c", "umid_max_pct", "umid_min_pct", "umid_pct", "vento_dir_gr",
     "vento_rajada_ms", "vento_vel_ms",
 ]
+FORMATOS_FUNDACAO = ("%Y-%m-%d", "%d/%m/%y")
+FORMATOS_DATA_HORA = ("%Y-%m-%d %H:%M", "%Y/%m/%d %H%M UTC")
 
 
 def decimal(texto: str) -> float | None:
@@ -20,12 +22,24 @@ def valor(texto: str) -> str | None:
     return None if texto in ("", "-9999") else texto.replace(",", ".")
 
 
+def escolher_formato(texto: str, formatos: tuple[str, ...]) -> str:
+    for formato in formatos:
+        try:
+            datetime.strptime(texto, formato)
+            return formato
+        except ValueError:
+            continue
+    raise ValueError(f"formato de data desconhecido: {texto!r}")
+
+
 def transformar(metadados: list[str], dados: list[list[str]]) -> tuple[tuple, list[tuple]]:
     regiao, uf, nome, cod, lat, lon, alt, fundacao = metadados
+    formato_fundacao = escolher_formato(fundacao, FORMATOS_FUNDACAO)
     estacao = (cod, nome, uf, regiao, decimal(lat), decimal(lon), decimal(alt),
-               datetime.strptime(fundacao, "%Y-%m-%d").date())
+               datetime.strptime(fundacao, formato_fundacao).date())
+    formato_hora = escolher_formato(f"{dados[0][0]} {dados[0][1]}", FORMATOS_DATA_HORA)
     medicoes = [
-        (cod, datetime.strptime(f"{l[0]} {l[1]}", "%Y-%m-%d %H:%M"),
+        (cod, datetime.strptime(f"{l[0]} {l[1]}", formato_hora),
          *(valor(v) for v in l[2:2 + len(COLUNAS_MEDIDA)]))
         for l in dados
     ]
