@@ -2,3 +2,4 @@ raw/*
 !raw/manifest.jsonl
 .venv/
 __pycache__/
+work/
