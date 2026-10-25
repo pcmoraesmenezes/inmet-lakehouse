@@ -9,6 +9,7 @@ from matplotlib.patches import Polygon
 
 from analise import geo
 from etl.extrair import COD_NOME_DO_ARQUIVO  # noqa: F401
+from etl.transformar import HORA_DIA_UTC, HORA_NOITE_UTC  # noqa: F401
 
 NOMES = {
     "c02": "Chuva (mm)",
@@ -31,8 +32,6 @@ NOMES = {
 }
 MEDIDAS = list(NOMES)
 ROTULO_AUSENTE = {**NOMES, "c06": "Radiação solar de dia (kJ/m²)", "c06n": "Radiação solar de noite (kJ/m²)"}
-HORA_DIA_UTC = (10, 20)
-HORA_NOITE_UTC = (23, 8)
 TETO_COR_AUSENTE = 30
 COR = {"neutro": "#8e99a8", "alerta": "#c8372d", "linha": "#2f6f9f", "fundo": "#eef1f5",
        "borda": "#b6bec9", "texto": "#2b2f36", "suave": "#5d6673"}

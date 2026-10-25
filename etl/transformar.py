@@ -8,7 +8,18 @@ COLUNAS_MEDIDA = [
     "vento_rajada_ms", "vento_vel_ms",
 ]
 FORMATOS_FUNDACAO = ("%Y-%m-%d", "%d/%m/%y")
+HORA_DIA_UTC = (10, 20)
+HORA_NOITE_UTC = (23, 8)
+DESLOCAMENTO_LOCAL_H = -3
 FORMATOS_DATA_HORA = ("%Y-%m-%d %H:%M", "%Y/%m/%d %H%M UTC")
+
+
+def periodo_do_dia(hora_utc: int) -> str:
+    if HORA_DIA_UTC[0] <= hora_utc <= HORA_DIA_UTC[1]:
+        return "dia"
+    if hora_utc >= HORA_NOITE_UTC[0] or hora_utc <= HORA_NOITE_UTC[1]:
+        return "noite"
+    return "transicao"
 
 
 def decimal(texto: str) -> float | None:
