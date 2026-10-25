@@ -1,12 +1,15 @@
 """Extrai: abre os zips do raw e lê os CSV de MG como texto bruto, sem interpretar nada."""
 import csv
 import json
+import re
 import zipfile
 from pathlib import Path
 
 RAIZ = Path(__file__).resolve().parent.parent
 CSV_MG = RAIZ / "work" / "csv_mg"
 LINHAS_METADADOS = 8
+COD_NOME_DO_ARQUIVO = re.compile(
+    r"INMET_\w+_MG_(?P<cod>[A-Z]\d+)_(?P<nome>.+)_\d\d-\d\d-\d{4}_A_\d\d-\d\d-\d{4}\.CSV", re.I)
 
 
 def extrair_csv_mg() -> None:

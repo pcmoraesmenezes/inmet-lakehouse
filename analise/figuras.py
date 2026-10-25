@@ -1,6 +1,4 @@
 """Figuras e frases da analise da bronze, cada degrau com uma pergunta, um grafico e uma frase-resposta."""
-import re
-
 import matplotlib
 
 matplotlib.use("Agg")
@@ -10,6 +8,7 @@ import pandas as pd
 from matplotlib.patches import Polygon
 
 from analise import geo
+from etl.extrair import COD_NOME_DO_ARQUIVO  # noqa: F401
 
 NOMES = {
     "c02": "Chuva (mm)",
@@ -42,8 +41,6 @@ COBERTURA_MINIMA = 0.8
 DESVIO_TEMPERATURA_C = 2
 GRADIENTE_PADRAO_C_POR_KM = 6.5
 
-
-COD_NOME_DO_ARQUIVO = re.compile(r"INMET_\w+_MG_(?P<cod>[A-Z]\d+)_(?P<nome>.+)_\d\d-\d\d-\d{4}_A_\d\d-\d\d-\d{4}\.CSV", re.I)
 
 
 def milhar(n: int) -> str:
