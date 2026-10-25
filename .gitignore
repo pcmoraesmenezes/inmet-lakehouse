@@ -1,0 +1,4 @@
+bronze/*
+!bronze/manifest.jsonl
+.venv/
+__pycache__/
