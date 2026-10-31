@@ -89,7 +89,9 @@ def main() -> None:
 
     spark.sql(f"DROP TABLE IF EXISTS {COPIA}")
     try:
-        medir("copiar a fato para a tabela de teste (DEEP CLONE)", f"CREATE TABLE {COPIA} DEEP CLONE {FATO}")
+        medir("copiar a fato para a tabela de teste (DEEP CLONE)",
+              f"CREATE TABLE {COPIA} DEEP CLONE {FATO} TBLPROPERTIES ('delta.autoOptimize.autoCompact' = 'false')")
+        spark.sql(f"ALTER TABLE {COPIA} DISABLE PREDICTIVE OPTIMIZATION")
         print(f"tamanho da copia: {tamanho(COPIA)}")
 
         print(f"consulta de 1 dia, todas as estacoes: {formatar(consulta_do_dia(COPIA))} (a 1a inclui a partida)")
@@ -103,7 +105,13 @@ def main() -> None:
         inicio = time.perf_counter()
         spark.sql(f"DELETE FROM {COPIA} WHERE estacao_sk = {sk} AND data_hora_utc >= '{DIA}' AND data_hora_utc < date_add('{DIA}', 1)")
         print(f"DELETE de 1 dia da {ESTACAO}: {(time.perf_counter() - inicio) * 1000:.0f} ms")
-        spark.sql(f"RESTORE TABLE {COPIA} TO VERSION AS OF 0").collect()
+        for tentativa in range(5):
+            try:
+                spark.sql(f"RESTORE TABLE {COPIA} TO VERSION AS OF 0").collect()
+                break
+            except Exception as erro:
+                if "DELTA_CONCURRENT_WRITE" not in str(erro) or tentativa == 4:
+                    raise
 
         medir("ADD COLUMN sensor_novo float (anula as linhas antigas)", f"ALTER TABLE {COPIA} ADD COLUMN sensor_novo float")
         medir("ADD COLUMN flag smallint NOT NULL DEFAULT 0", f"ALTER TABLE {COPIA} ADD COLUMN flag smallint NOT NULL DEFAULT 0")
