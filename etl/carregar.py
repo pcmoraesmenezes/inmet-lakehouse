@@ -18,8 +18,9 @@ def carregar(dw: psycopg.Connection, ano: int, estacao: tuple, medicoes: list[tu
     with dw.transaction(), dw.cursor() as cur:
         cur.execute(SQL_ESTACAO, estacao)
         cur.execute(
-            "DELETE FROM dw.medicao WHERE cod = %s AND EXTRACT(year FROM data_hora_utc) = %s",
-            (estacao[0], ano),
+            "DELETE FROM dw.medicao WHERE cod = %s "
+            "AND data_hora_utc >= make_date(%s, 1, 1) AND data_hora_utc < make_date(%s + 1, 1, 1)",
+            (estacao[0], ano, ano),
         )
         with cur.copy(SQL_COPY) as copia:
             for linha in medicoes:

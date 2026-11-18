@@ -1,5 +1,6 @@
-"""Extrai: abre os zips do raw e lê os CSV de MG como texto bruto, sem interpretar nada."""
+"""Extrai: abre os zips do raw e lê os CSV como texto bruto, sem interpretar nada."""
 import csv
+import io
 import json
 import re
 import zipfile
@@ -28,12 +29,29 @@ def listar_arquivos(ano: int) -> list[Path]:
     return sorted((CSV_MG / str(ano)).glob("*.CSV"))
 
 
-def ler_bruto(caminho: Path) -> tuple[list[str], list[list[str]]]:
-    with caminho.open(encoding="latin-1", newline="") as fh:
-        linhas = list(csv.reader(fh, delimiter=";"))
+def separar(fonte) -> tuple[list[str], list[list[str]]]:
+    linhas = list(csv.reader(fonte, delimiter=";"))
     metadados = [l[1] for l in linhas[:LINHAS_METADADOS]]
     dados = [l for l in linhas[LINHAS_METADADOS + 1:] if l]
     return metadados, dados
+
+
+def ler_bruto(caminho: Path) -> tuple[list[str], list[list[str]]]:
+    with caminho.open(encoding="latin-1", newline="") as fh:
+        return separar(fh)
+
+
+def ler_do_zip(ano: int, uf: str | None = None):
+    """Devolve (nome do arquivo, (metadados, dados)) de cada CSV do ano, lido direto do zip."""
+    registros = map(json.loads, (RAIZ / "raw" / "manifest.jsonl").read_text(encoding="utf-8").splitlines())
+    registro = next(r for r in registros if r["ano"] == ano)
+    with zipfile.ZipFile(RAIZ / registro["arquivo"]) as z:
+        for membro in sorted(z.infolist(), key=lambda m: m.filename):
+            nome = Path(membro.filename).name
+            if membro.is_dir() or not nome.upper().endswith(".CSV") or (uf and f"_{uf}_" not in nome):
+                continue
+            with z.open(membro) as bruto:
+                yield nome, separar(io.TextIOWrapper(bruto, encoding="latin-1", newline=""))
 
 
 if __name__ == "__main__":
