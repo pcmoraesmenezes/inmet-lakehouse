@@ -1,6 +1,7 @@
 """Bronze nacional: carrega todas as linhas dos CSV do Brasil, ano a ano, numa tabela Delta, sem converter nada."""
 import json
 import shutil
+import time
 from pathlib import Path
 
 from pyspark.sql import SparkSession, functions as F
@@ -46,9 +47,20 @@ def ler_ano(ano: int):
     )
 
 
-def carregar_ano(ano: int) -> None:
-    (ler_ano(ano).write.format("delta").mode("overwrite")
-     .option("replaceWhere", f"ano = {ano}").saveAsTable(TABELA))
+def carregar_ano(ano: int, tentativas: int = 5, espera: int = 10) -> None:
+    # O FUSE do volume confirma a escrita antes de o arquivo estar no storage na nuvem: um CSV
+    # recem-extraido pode dar FAILED_READ_FILE nos executores. Espera e le o ano de novo ate propagar.
+    for tentativa in range(1, tentativas + 1):
+        try:
+            (ler_ano(ano).write.format("delta").mode("overwrite")
+             .option("replaceWhere", f"ano = {ano}").saveAsTable(TABELA))
+            return
+        except Exception as e:
+            if tentativa == tentativas or "FAILED_READ_FILE" not in str(e):
+                raise
+            print(f"{ano}: leitura ainda nao propagou (tentativa {tentativa}/{tentativas}); "
+                  f"nova leitura em {espera * tentativa}s")
+            time.sleep(espera * tentativa)
 
 
 def esperado(gabarito: dict, ano: int) -> tuple[int, int]:
