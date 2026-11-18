@@ -1,10 +1,20 @@
 """Versiona as estacoes: uma versao nova so quando a posicao ou a altitude mudam alem do arredondamento."""
+import re
+
 import pandas as pd
 
 from analise import geo
 
 LIMITE_POSICAO_M = 100
 LIMITE_ALTITUDE_M = 50
+CODIGO_DA_ESTACAO = re.compile(r"[A-Z]\d{3}")
+
+
+def chave_estacao(cod: str, ano_inicio: int) -> int:
+    # Derivada de cod e ano_inicio: acrescentar uma versão a uma estação não renumera as demais.
+    if not CODIGO_DA_ESTACAO.fullmatch(cod):
+        raise ValueError(f"codigo de estacao fora do padrao letra e tres digitos: {cod!r}")
+    return ((ord(cod[0]) - 64) * 1000 + int(cod[1:])) * 10000 + ano_inicio
 
 
 def nativo(valor):
@@ -35,5 +45,5 @@ def versionar(estacoes: pd.DataFrame) -> pd.DataFrame:
                                alt=r.alt, data_fundacao=ultimo.data_fundacao, ano_inicio=int(v["ano_inicio"]),
                                ano_fim=int(v["ano_fim"]), atual=i == len(versoes) - 1))
     dimensao = pd.DataFrame(linhas).sort_values(["cod", "ano_inicio"]).reset_index(drop=True)
-    dimensao.insert(0, "estacao_sk", range(1, len(dimensao) + 1))
+    dimensao.insert(0, "estacao_sk", [chave_estacao(c, a) for c, a in zip(dimensao.cod, dimensao.ano_inicio)])
     return dimensao
