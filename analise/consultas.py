@@ -1,5 +1,6 @@
 """Lê a suíte db/consultas.sql e monta o SQL de cada consulta para um motor e um escopo."""
 import re
+import sys
 from pathlib import Path
 
 ARQUIVO = Path(__file__).resolve().parent.parent / "db" / "consultas.sql"
@@ -25,3 +26,17 @@ def ler_suite(arquivo: Path = ARQUIVO) -> dict[str, dict]:
 def montar(sql: str, motor: str, escopo: str, ano: int = 2024, estacao: str = "A502") -> str:
     return sql.format(origem=ORIGENS[motor], escopo=ESCOPOS[escopo],
                       ano=ano, ano_seguinte=ano + 1, estacao=estacao)
+
+
+def renderizar(motor: str, escopo: str, ano: int = 2024, estacao: str = "A502") -> str:
+    blocos = [f"-- Gerado por analise/consultas.py ({motor}, {escopo}, {ano}). Não editar: a fonte é db/consultas.sql."]
+    if motor == "lakehouse":
+        blocos.append("SET TIME ZONE 'UTC';")
+    for q, c in ler_suite().items():
+        blocos.append(f"-- {q}: {c['pergunta']} | consumidor: {c['consumidor']}\n"
+                      f"{montar(c['sql'], motor, escopo, ano, estacao)};")
+    return "\n\n".join(blocos) + "\n"
+
+
+if __name__ == "__main__":
+    print(renderizar(sys.argv[1], sys.argv[2], *(int(a) for a in sys.argv[3:4])), end="")
