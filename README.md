@@ -62,7 +62,7 @@ uv run --env-file .env python -m etl.rodar --ano 2016
 
 `docker compose up -d etl` starts the simulation: a container that delivers one year every two minutes into a second database, `inmet_sim`, created with `db/schema.sql` plus the delivery ledger in `db/simulacao.sql`. Raw CSVs go in `work/csv_mg/<year>/` and are not versioned.
 
-Lakehouse: add the repository as a Git folder in Databricks, download the zips into the volume with `ingest/baixar_inmet.py`, then run `databricks/01_extrair_mg.py`, `02_bronze.py`, `04_prata.py`, `05_ouro.py` and, to repeat the comparison, `06_medir_lakehouse.py`. `03_analise_bronze.py` is the exploratory step on the bronze layer. Every layer is safe to rerun: loads replace one year at a time.
+Lakehouse: add the repository as a Git folder in Databricks, download the zips into the volume with `ingest/baixar_inmet.py`, then run `databricks/02_bronze.py`, which extracts one year at a time, loads the whole country into `bronze_br` and checks it against `analise/gabarito_bronze_br.py`, a count taken straight from the zips. `03_analise_bronze.py`, `04_prata.py`, `05_ouro.py` and `06_medir_lakehouse.py` read `bronze_csv`, the MG-only table. Every layer is safe to rerun: loads replace one year at a time.
 
 ## Limitations
 

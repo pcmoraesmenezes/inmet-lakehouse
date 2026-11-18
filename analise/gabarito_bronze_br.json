@@ -1,0 +1,1142 @@
+{
+ "2016": {
+  "csv": 529,
+  "linhas": 4376889,
+  "por_uf": {
+   "AC": {
+    "csv": 7,
+    "linhas": 61551
+   },
+   "AL": {
+    "csv": 6,
+    "linhas": 52758
+   },
+   "AM": {
+    "csv": 25,
+    "linhas": 163545
+   },
+   "AP": {
+    "csv": 2,
+    "linhas": 17586
+   },
+   "BA": {
+    "csv": 46,
+    "linhas": 391374
+   },
+   "CE": {
+    "csv": 14,
+    "linhas": 123102
+   },
+   "DF": {
+    "csv": 3,
+    "linhas": 26379
+   },
+   "ES": {
+    "csv": 9,
+    "linhas": 79137
+   },
+   "GO": {
+    "csv": 22,
+    "linhas": 193446
+   },
+   "MA": {
+    "csv": 17,
+    "linhas": 141441
+   },
+   "MG": {
+    "csv": 61,
+    "linhas": 504693
+   },
+   "MS": {
+    "csv": 28,
+    "linhas": 246204
+   },
+   "MT": {
+    "csv": 34,
+    "linhas": 298962
+   },
+   "PA": {
+    "csv": 30,
+    "linhas": 225918
+   },
+   "PB": {
+    "csv": 8,
+    "linhas": 70344
+   },
+   "PE": {
+    "csv": 12,
+    "linhas": 105516
+   },
+   "PI": {
+    "csv": 19,
+    "linhas": 167067
+   },
+   "PR": {
+    "csv": 26,
+    "linhas": 214530
+   },
+   "RJ": {
+    "csv": 20,
+    "linhas": 168348
+   },
+   "RN": {
+    "csv": 8,
+    "linhas": 70344
+   },
+   "RO": {
+    "csv": 7,
+    "linhas": 37431
+   },
+   "RR": {
+    "csv": 3,
+    "linhas": 10299
+   },
+   "RS": {
+    "csv": 42,
+    "linhas": 351594
+   },
+   "SC": {
+    "csv": 22,
+    "linhas": 189822
+   },
+   "SE": {
+    "csv": 5,
+    "linhas": 43965
+   },
+   "SP": {
+    "csv": 33,
+    "linhas": 275601
+   },
+   "TO": {
+    "csv": 20,
+    "linhas": 145932
+   }
+  }
+ },
+ "2017": {
+  "csv": 563,
+  "linhas": 4780611,
+  "por_uf": {
+   "AC": {
+    "csv": 7,
+    "linhas": 61383
+   },
+   "AL": {
+    "csv": 7,
+    "linhas": 55095
+   },
+   "AM": {
+    "csv": 25,
+    "linhas": 219225
+   },
+   "AP": {
+    "csv": 3,
+    "linhas": 20667
+   },
+   "BA": {
+    "csv": 46,
+    "linhas": 403374
+   },
+   "CE": {
+    "csv": 14,
+    "linhas": 122766
+   },
+   "DF": {
+    "csv": 5,
+    "linhas": 38181
+   },
+   "ES": {
+    "csv": 13,
+    "linhas": 108237
+   },
+   "GO": {
+    "csv": 24,
+    "linhas": 200472
+   },
+   "MA": {
+    "csv": 17,
+    "linhas": 149073
+   },
+   "MG": {
+    "csv": 67,
+    "linhas": 558795
+   },
+   "MS": {
+    "csv": 28,
+    "linhas": 245532
+   },
+   "MT": {
+    "csv": 36,
+    "linhas": 301524
+   },
+   "PA": {
+    "csv": 31,
+    "linhas": 264831
+   },
+   "PB": {
+    "csv": 9,
+    "linhas": 71577
+   },
+   "PE": {
+    "csv": 13,
+    "linhas": 107829
+   },
+   "PI": {
+    "csv": 19,
+    "linhas": 166611
+   },
+   "PR": {
+    "csv": 26,
+    "linhas": 227994
+   },
+   "RJ": {
+    "csv": 23,
+    "linhas": 184887
+   },
+   "RN": {
+    "csv": 9,
+    "linhas": 71457
+   },
+   "RO": {
+    "csv": 7,
+    "linhas": 61383
+   },
+   "RR": {
+    "csv": 3,
+    "linhas": 26307
+   },
+   "RS": {
+    "csv": 42,
+    "linhas": 368298
+   },
+   "SC": {
+    "csv": 22,
+    "linhas": 192918
+   },
+   "SE": {
+    "csv": 7,
+    "linhas": 56703
+   },
+   "SP": {
+    "csv": 40,
+    "linhas": 320112
+   },
+   "TO": {
+    "csv": 20,
+    "linhas": 175380
+   }
+  }
+ },
+ "2018": {
+  "csv": 596,
+  "linhas": 5133780,
+  "por_uf": {
+   "AC": {
+    "csv": 7,
+    "linhas": 61383
+   },
+   "AL": {
+    "csv": 7,
+    "linhas": 61383
+   },
+   "AM": {
+    "csv": 25,
+    "linhas": 219225
+   },
+   "AP": {
+    "csv": 3,
+    "linhas": 26307
+   },
+   "BA": {
+    "csv": 48,
+    "linhas": 412992
+   },
+   "CE": {
+    "csv": 16,
+    "linhas": 136680
+   },
+   "DF": {
+    "csv": 5,
+    "linhas": 43845
+   },
+   "ES": {
+    "csv": 13,
+    "linhas": 113997
+   },
+   "GO": {
+    "csv": 26,
+    "linhas": 221298
+   },
+   "MA": {
+    "csv": 17,
+    "linhas": 149073
+   },
+   "MG": {
+    "csv": 68,
+    "linhas": 594516
+   },
+   "MS": {
+    "csv": 45,
+    "linhas": 364437
+   },
+   "MT": {
+    "csv": 36,
+    "linhas": 315684
+   },
+   "PA": {
+    "csv": 33,
+    "linhas": 280665
+   },
+   "PB": {
+    "csv": 9,
+    "linhas": 78921
+   },
+   "PE": {
+    "csv": 13,
+    "linhas": 113997
+   },
+   "PI": {
+    "csv": 21,
+    "linhas": 172317
+   },
+   "PR": {
+    "csv": 26,
+    "linhas": 227994
+   },
+   "RJ": {
+    "csv": 26,
+    "linhas": 209658
+   },
+   "RN": {
+    "csv": 9,
+    "linhas": 78921
+   },
+   "RO": {
+    "csv": 7,
+    "linhas": 61383
+   },
+   "RR": {
+    "csv": 3,
+    "linhas": 26307
+   },
+   "RS": {
+    "csv": 43,
+    "linhas": 375315
+   },
+   "SC": {
+    "csv": 22,
+    "linhas": 192918
+   },
+   "SE": {
+    "csv": 7,
+    "linhas": 61383
+   },
+   "SP": {
+    "csv": 41,
+    "linhas": 357801
+   },
+   "TO": {
+    "csv": 20,
+    "linhas": 175380
+   }
+  }
+ },
+ "2019": {
+  "csv": 589,
+  "linhas": 5123517,
+  "por_uf": {
+   "AC": {
+    "csv": 7,
+    "linhas": 61383
+   },
+   "AL": {
+    "csv": 7,
+    "linhas": 61383
+   },
+   "AM": {
+    "csv": 19,
+    "linhas": 161859
+   },
+   "AP": {
+    "csv": 4,
+    "linhas": 35076
+   },
+   "BA": {
+    "csv": 47,
+    "linhas": 412143
+   },
+   "CE": {
+    "csv": 16,
+    "linhas": 140304
+   },
+   "DF": {
+    "csv": 5,
+    "linhas": 43845
+   },
+   "ES": {
+    "csv": 13,
+    "linhas": 113997
+   },
+   "GO": {
+    "csv": 26,
+    "linhas": 227994
+   },
+   "MA": {
+    "csv": 17,
+    "linhas": 142833
+   },
+   "MG": {
+    "csv": 67,
+    "linhas": 587523
+   },
+   "MS": {
+    "csv": 45,
+    "linhas": 394605
+   },
+   "MT": {
+    "csv": 39,
+    "linhas": 335151
+   },
+   "PA": {
+    "csv": 31,
+    "linhas": 267255
+   },
+   "PB": {
+    "csv": 9,
+    "linhas": 78921
+   },
+   "PE": {
+    "csv": 13,
+    "linhas": 113997
+   },
+   "PI": {
+    "csv": 21,
+    "linhas": 176541
+   },
+   "PR": {
+    "csv": 26,
+    "linhas": 227994
+   },
+   "RJ": {
+    "csv": 26,
+    "linhas": 227994
+   },
+   "RN": {
+    "csv": 9,
+    "linhas": 78921
+   },
+   "RO": {
+    "csv": 4,
+    "linhas": 35076
+   },
+   "RR": {
+    "csv": 1,
+    "linhas": 8769
+   },
+   "RS": {
+    "csv": 44,
+    "linhas": 381084
+   },
+   "SC": {
+    "csv": 24,
+    "linhas": 208200
+   },
+   "SE": {
+    "csv": 7,
+    "linhas": 61383
+   },
+   "SP": {
+    "csv": 42,
+    "linhas": 363906
+   },
+   "TO": {
+    "csv": 20,
+    "linhas": 175380
+   }
+  }
+ },
+ "2020": {
+  "csv": 589,
+  "linhas": 5179077,
+  "por_uf": {
+   "AC": {
+    "csv": 7,
+    "linhas": 61551
+   },
+   "AL": {
+    "csv": 7,
+    "linhas": 61551
+   },
+   "AM": {
+    "csv": 19,
+    "linhas": 167067
+   },
+   "AP": {
+    "csv": 4,
+    "linhas": 35172
+   },
+   "BA": {
+    "csv": 47,
+    "linhas": 413271
+   },
+   "CE": {
+    "csv": 16,
+    "linhas": 140688
+   },
+   "DF": {
+    "csv": 5,
+    "linhas": 43965
+   },
+   "ES": {
+    "csv": 13,
+    "linhas": 114309
+   },
+   "GO": {
+    "csv": 26,
+    "linhas": 228618
+   },
+   "MA": {
+    "csv": 17,
+    "linhas": 149481
+   },
+   "MG": {
+    "csv": 67,
+    "linhas": 589131
+   },
+   "MS": {
+    "csv": 45,
+    "linhas": 395685
+   },
+   "MT": {
+    "csv": 38,
+    "linhas": 334134
+   },
+   "PA": {
+    "csv": 31,
+    "linhas": 272583
+   },
+   "PB": {
+    "csv": 9,
+    "linhas": 79137
+   },
+   "PE": {
+    "csv": 13,
+    "linhas": 114309
+   },
+   "PI": {
+    "csv": 21,
+    "linhas": 184653
+   },
+   "PR": {
+    "csv": 26,
+    "linhas": 228618
+   },
+   "RJ": {
+    "csv": 26,
+    "linhas": 228618
+   },
+   "RN": {
+    "csv": 9,
+    "linhas": 79137
+   },
+   "RO": {
+    "csv": 4,
+    "linhas": 35172
+   },
+   "RR": {
+    "csv": 1,
+    "linhas": 8793
+   },
+   "RS": {
+    "csv": 44,
+    "linhas": 386892
+   },
+   "SC": {
+    "csv": 24,
+    "linhas": 211032
+   },
+   "SE": {
+    "csv": 7,
+    "linhas": 61551
+   },
+   "SP": {
+    "csv": 43,
+    "linhas": 378099
+   },
+   "TO": {
+    "csv": 20,
+    "linhas": 175860
+   }
+  }
+ },
+ "2021": {
+  "csv": 588,
+  "linhas": 5156172,
+  "por_uf": {
+   "AC": {
+    "csv": 7,
+    "linhas": 61383
+   },
+   "AL": {
+    "csv": 7,
+    "linhas": 61383
+   },
+   "AM": {
+    "csv": 19,
+    "linhas": 166611
+   },
+   "AP": {
+    "csv": 4,
+    "linhas": 35076
+   },
+   "BA": {
+    "csv": 47,
+    "linhas": 412143
+   },
+   "CE": {
+    "csv": 16,
+    "linhas": 140304
+   },
+   "DF": {
+    "csv": 5,
+    "linhas": 43845
+   },
+   "ES": {
+    "csv": 13,
+    "linhas": 113997
+   },
+   "GO": {
+    "csv": 26,
+    "linhas": 227994
+   },
+   "MA": {
+    "csv": 17,
+    "linhas": 149073
+   },
+   "MG": {
+    "csv": 68,
+    "linhas": 596292
+   },
+   "MS": {
+    "csv": 45,
+    "linhas": 394605
+   },
+   "MT": {
+    "csv": 37,
+    "linhas": 324453
+   },
+   "PA": {
+    "csv": 32,
+    "linhas": 280608
+   },
+   "PB": {
+    "csv": 9,
+    "linhas": 78921
+   },
+   "PE": {
+    "csv": 13,
+    "linhas": 113997
+   },
+   "PI": {
+    "csv": 21,
+    "linhas": 184149
+   },
+   "PR": {
+    "csv": 26,
+    "linhas": 227994
+   },
+   "RJ": {
+    "csv": 26,
+    "linhas": 227994
+   },
+   "RN": {
+    "csv": 8,
+    "linhas": 70152
+   },
+   "RO": {
+    "csv": 4,
+    "linhas": 35076
+   },
+   "RR": {
+    "csv": 1,
+    "linhas": 8769
+   },
+   "RS": {
+    "csv": 44,
+    "linhas": 385836
+   },
+   "SC": {
+    "csv": 24,
+    "linhas": 210456
+   },
+   "SE": {
+    "csv": 7,
+    "linhas": 61383
+   },
+   "SP": {
+    "csv": 42,
+    "linhas": 368298
+   },
+   "TO": {
+    "csv": 20,
+    "linhas": 175380
+   }
+  }
+ },
+ "2022": {
+  "csv": 567,
+  "linhas": 4954023,
+  "por_uf": {
+   "AC": {
+    "csv": 7,
+    "linhas": 61383
+   },
+   "AL": {
+    "csv": 7,
+    "linhas": 61383
+   },
+   "AM": {
+    "csv": 19,
+    "linhas": 166611
+   },
+   "AP": {
+    "csv": 4,
+    "linhas": 35076
+   },
+   "BA": {
+    "csv": 46,
+    "linhas": 403374
+   },
+   "CE": {
+    "csv": 16,
+    "linhas": 140304
+   },
+   "DF": {
+    "csv": 5,
+    "linhas": 43845
+   },
+   "ES": {
+    "csv": 13,
+    "linhas": 113997
+   },
+   "GO": {
+    "csv": 26,
+    "linhas": 227994
+   },
+   "MA": {
+    "csv": 17,
+    "linhas": 149073
+   },
+   "MG": {
+    "csv": 68,
+    "linhas": 596292
+   },
+   "MS": {
+    "csv": 28,
+    "linhas": 245532
+   },
+   "MT": {
+    "csv": 38,
+    "linhas": 333222
+   },
+   "PA": {
+    "csv": 33,
+    "linhas": 287073
+   },
+   "PB": {
+    "csv": 9,
+    "linhas": 78921
+   },
+   "PE": {
+    "csv": 13,
+    "linhas": 113997
+   },
+   "PI": {
+    "csv": 21,
+    "linhas": 184149
+   },
+   "PR": {
+    "csv": 24,
+    "linhas": 210456
+   },
+   "RJ": {
+    "csv": 26,
+    "linhas": 220482
+   },
+   "RN": {
+    "csv": 8,
+    "linhas": 70152
+   },
+   "RO": {
+    "csv": 4,
+    "linhas": 35076
+   },
+   "RR": {
+    "csv": 1,
+    "linhas": 8769
+   },
+   "RS": {
+    "csv": 45,
+    "linhas": 386421
+   },
+   "SC": {
+    "csv": 24,
+    "linhas": 210456
+   },
+   "SE": {
+    "csv": 7,
+    "linhas": 61383
+   },
+   "SP": {
+    "csv": 38,
+    "linhas": 333222
+   },
+   "TO": {
+    "csv": 20,
+    "linhas": 175380
+   }
+  }
+ },
+ "2023": {
+  "csv": 567,
+  "linhas": 4972023,
+  "por_uf": {
+   "AC": {
+    "csv": 7,
+    "linhas": 61383
+   },
+   "AL": {
+    "csv": 7,
+    "linhas": 61383
+   },
+   "AM": {
+    "csv": 19,
+    "linhas": 166611
+   },
+   "AP": {
+    "csv": 4,
+    "linhas": 35076
+   },
+   "BA": {
+    "csv": 45,
+    "linhas": 394605
+   },
+   "CE": {
+    "csv": 16,
+    "linhas": 140304
+   },
+   "DF": {
+    "csv": 5,
+    "linhas": 43845
+   },
+   "ES": {
+    "csv": 12,
+    "linhas": 105228
+   },
+   "GO": {
+    "csv": 26,
+    "linhas": 227994
+   },
+   "MA": {
+    "csv": 17,
+    "linhas": 149073
+   },
+   "MG": {
+    "csv": 68,
+    "linhas": 596292
+   },
+   "MS": {
+    "csv": 27,
+    "linhas": 236763
+   },
+   "MT": {
+    "csv": 38,
+    "linhas": 333222
+   },
+   "PA": {
+    "csv": 33,
+    "linhas": 289377
+   },
+   "PB": {
+    "csv": 9,
+    "linhas": 78921
+   },
+   "PE": {
+    "csv": 13,
+    "linhas": 113997
+   },
+   "PI": {
+    "csv": 21,
+    "linhas": 184149
+   },
+   "PR": {
+    "csv": 26,
+    "linhas": 227994
+   },
+   "RJ": {
+    "csv": 26,
+    "linhas": 227994
+   },
+   "RN": {
+    "csv": 8,
+    "linhas": 70152
+   },
+   "RO": {
+    "csv": 4,
+    "linhas": 35076
+   },
+   "RR": {
+    "csv": 1,
+    "linhas": 8769
+   },
+   "RS": {
+    "csv": 45,
+    "linhas": 394605
+   },
+   "SC": {
+    "csv": 24,
+    "linhas": 210456
+   },
+   "SE": {
+    "csv": 6,
+    "linhas": 52614
+   },
+   "SP": {
+    "csv": 40,
+    "linhas": 350760
+   },
+   "TO": {
+    "csv": 20,
+    "linhas": 175380
+   }
+  }
+ },
+ "2024": {
+  "csv": 565,
+  "linhas": 4968045,
+  "por_uf": {
+   "AC": {
+    "csv": 7,
+    "linhas": 61551
+   },
+   "AL": {
+    "csv": 7,
+    "linhas": 61551
+   },
+   "AM": {
+    "csv": 19,
+    "linhas": 167067
+   },
+   "AP": {
+    "csv": 4,
+    "linhas": 35172
+   },
+   "BA": {
+    "csv": 45,
+    "linhas": 395685
+   },
+   "CE": {
+    "csv": 16,
+    "linhas": 140688
+   },
+   "DF": {
+    "csv": 5,
+    "linhas": 43965
+   },
+   "ES": {
+    "csv": 12,
+    "linhas": 105516
+   },
+   "GO": {
+    "csv": 26,
+    "linhas": 228618
+   },
+   "MA": {
+    "csv": 17,
+    "linhas": 149481
+   },
+   "MG": {
+    "csv": 68,
+    "linhas": 597924
+   },
+   "MS": {
+    "csv": 27,
+    "linhas": 237411
+   },
+   "MT": {
+    "csv": 38,
+    "linhas": 334134
+   },
+   "PA": {
+    "csv": 33,
+    "linhas": 290169
+   },
+   "PB": {
+    "csv": 9,
+    "linhas": 79137
+   },
+   "PE": {
+    "csv": 12,
+    "linhas": 105516
+   },
+   "PI": {
+    "csv": 21,
+    "linhas": 184653
+   },
+   "PR": {
+    "csv": 26,
+    "linhas": 228618
+   },
+   "RJ": {
+    "csv": 26,
+    "linhas": 228618
+   },
+   "RN": {
+    "csv": 8,
+    "linhas": 70344
+   },
+   "RO": {
+    "csv": 4,
+    "linhas": 35172
+   },
+   "RR": {
+    "csv": 1,
+    "linhas": 8793
+   },
+   "RS": {
+    "csv": 44,
+    "linhas": 386892
+   },
+   "SC": {
+    "csv": 24,
+    "linhas": 211032
+   },
+   "SE": {
+    "csv": 6,
+    "linhas": 52758
+   },
+   "SP": {
+    "csv": 40,
+    "linhas": 351720
+   },
+   "TO": {
+    "csv": 20,
+    "linhas": 175860
+   }
+  }
+ },
+ "2025": {
+  "csv": 594,
+  "linhas": 5025594,
+  "por_uf": {
+   "AC": {
+    "csv": 7,
+    "linhas": 61383
+   },
+   "AL": {
+    "csv": 7,
+    "linhas": 61383
+   },
+   "AM": {
+    "csv": 19,
+    "linhas": 166611
+   },
+   "AP": {
+    "csv": 4,
+    "linhas": 35076
+   },
+   "BA": {
+    "csv": 45,
+    "linhas": 394605
+   },
+   "CE": {
+    "csv": 16,
+    "linhas": 140304
+   },
+   "DF": {
+    "csv": 5,
+    "linhas": 43845
+   },
+   "ES": {
+    "csv": 11,
+    "linhas": 96459
+   },
+   "GO": {
+    "csv": 26,
+    "linhas": 227994
+   },
+   "MA": {
+    "csv": 17,
+    "linhas": 149073
+   },
+   "MG": {
+    "csv": 69,
+    "linhas": 599325
+   },
+   "MS": {
+    "csv": 27,
+    "linhas": 236763
+   },
+   "MT": {
+    "csv": 43,
+    "linhas": 329163
+   },
+   "PA": {
+    "csv": 33,
+    "linhas": 289377
+   },
+   "PB": {
+    "csv": 9,
+    "linhas": 78921
+   },
+   "PE": {
+    "csv": 12,
+    "linhas": 105228
+   },
+   "PI": {
+    "csv": 21,
+    "linhas": 184149
+   },
+   "PR": {
+    "csv": 26,
+    "linhas": 227994
+   },
+   "RJ": {
+    "csv": 26,
+    "linhas": 227994
+   },
+   "RN": {
+    "csv": 8,
+    "linhas": 70152
+   },
+   "RO": {
+    "csv": 4,
+    "linhas": 35076
+   },
+   "RR": {
+    "csv": 1,
+    "linhas": 8769
+   },
+   "RS": {
+    "csv": 68,
+    "linhas": 466740
+   },
+   "SC": {
+    "csv": 24,
+    "linhas": 210456
+   },
+   "SE": {
+    "csv": 6,
+    "linhas": 52614
+   },
+   "SP": {
+    "csv": 40,
+    "linhas": 350760
+   },
+   "TO": {
+    "csv": 20,
+    "linhas": 175380
+   }
+  }
+ }
+}
