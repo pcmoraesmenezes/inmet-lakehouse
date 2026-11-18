@@ -1,9 +1,10 @@
-"""Contorno de MG, ponto dentro do contorno e distancia entre coordenadas, so com a biblioteca padrao."""
+"""Contornos das UFs, ponto dentro do contorno e distancia entre coordenadas, so com a biblioteca padrao."""
 import json
 import math
 from pathlib import Path
 
 CONTORNO = Path(__file__).resolve().parent / "mg_contorno.geojson"
+CONTORNOS = Path(__file__).resolve().parent / "uf_contornos.geojson"
 RAIO_TERRA_KM = 6371.0
 
 
@@ -11,6 +12,12 @@ def carregar_contorno() -> list[list[tuple[float, float]]]:
     geometria = json.loads(CONTORNO.read_text(encoding="utf-8"))["features"][0]["geometry"]
     poligonos = geometria["coordinates"] if geometria["type"] == "MultiPolygon" else [geometria["coordinates"]]
     return [[tuple(p) for p in poligono[0]] for poligono in poligonos]
+
+
+def carregar_contornos() -> dict[str, list[list[tuple[float, float]]]]:
+    features = json.loads(CONTORNOS.read_text(encoding="utf-8"))["features"]
+    return {f["properties"]["uf"]: [[tuple(p) for p in poligono[0]] for poligono in f["geometry"]["coordinates"]]
+            for f in features}
 
 
 def dentro(lon: float, lat: float, aneis: list[list[tuple[float, float]]]) -> bool:
