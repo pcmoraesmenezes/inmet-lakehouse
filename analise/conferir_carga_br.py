@@ -21,10 +21,13 @@ def esperado() -> dict[int, tuple[int, int]]:
 
 
 def main() -> None:
+    anos = {int(a) for a in sys.argv[1:]}
     falhou = False
     total = 0
     with abrir() as dw, dw.cursor() as cur:
         for ano, (linhas, linhas_mg) in sorted(esperado().items()):
+            if anos and ano not in anos:
+                continue
             cur.execute(
                 "SELECT count(*), count(*) FILTER (WHERE e.uf = 'MG') FROM dw.medicao m JOIN dw.estacao e USING (cod) "
                 "WHERE m.data_hora_utc >= make_date(%s, 1, 1) AND m.data_hora_utc < make_date(%s + 1, 1, 1)",
@@ -34,9 +37,11 @@ def main() -> None:
             falhou |= not ok
             total += no_banco
             print(f"{ano}: {'OK' if ok else 'DIVERGE'} linhas {no_banco}/{linhas}, MG {mg_no_banco}/{linhas_mg}")
-        cur.execute("SELECT CASE WHEN to_regclass('dw.medicao_outros') IS NULL THEN 0 "
-                    "ELSE (SELECT count(*) FROM dw.medicao_outros) END")
-        residual = cur.fetchone()[0]
+        cur.execute("SELECT to_regclass('dw.medicao_outros') IS NOT NULL")
+        residual = 0
+        if cur.fetchone()[0]:
+            cur.execute("SELECT count(*) FROM dw.medicao_outros")
+            residual = cur.fetchone()[0]
     falhou |= residual != 0
     print(f"total {total}, partição residual com {residual} linhas")
     sys.exit(1 if falhou else 0)

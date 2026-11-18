@@ -46,8 +46,8 @@ CREATE TABLE dw.medicao_2024 PARTITION OF dw.medicao FOR VALUES FROM ('2024-01-0
 CREATE TABLE dw.medicao_2025 PARTITION OF dw.medicao FOR VALUES FROM ('2025-01-01') TO ('2026-01-01');
 CREATE TABLE dw.medicao_outros PARTITION OF dw.medicao DEFAULT;
 
--- A carga grava uma estação por vez, então só blocos vizinhos pequenos cobrem uma faixa curta de datas.
-CREATE INDEX medicao_data_brin ON dw.medicao USING BRIN (data_hora_utc) WITH (pages_per_range = 4);
+-- Índice comum na data: a carga grava uma estação por vez, e o BRIN não se mostrou útil nessa ordem física.
+CREATE INDEX medicao_data_idx ON dw.medicao (data_hora_utc);
 
 CREATE TABLE dw.carga (
     id       bigserial PRIMARY KEY,
