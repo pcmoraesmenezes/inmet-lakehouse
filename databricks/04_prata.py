@@ -16,7 +16,7 @@ from analise import geo
 from etl.extrair import COD_NOME_DO_ARQUIVO
 from etl.transformar import COLUNAS_MEDIDA, FORMATOS_FUNDACAO, escolher_formato
 
-BRONZE = "workspace.inmet.bronze_csv"
+BRONZE = "workspace.inmet.bronze_br"
 ESTACAO = "workspace.inmet.silver_estacao_ano"
 MEDICAO = "workspace.inmet.silver_medicao"
 # Maximo de radiacao que chega ao topo da atmosfera em uma hora: 1361 W/m2 por 3600 s.
@@ -25,7 +25,7 @@ LINHA_DE_DADO = F.col("c00").rlike(r"^\d{4}[-/]\d{2}[-/]\d{2}$")
 ESQUEMA_ESTACAO = StructType([
     StructField("cod", StringType()), StructField("nome", StringType()), StructField("uf", StringType()),
     StructField("regiao", StringType()), StructField("lat", DoubleType()), StructField("lon", DoubleType()),
-    StructField("alt", DoubleType()), StructField("data_fundacao", DateType()), StructField("em_mg", BooleanType()),
+    StructField("alt", DoubleType()), StructField("data_fundacao", DateType()), StructField("em_uf", BooleanType()),
     StructField("ano", IntegerType()), StructField("arquivo", StringType()),
 ])
 
@@ -65,11 +65,12 @@ def estacao_ano() -> pd.DataFrame:
           .toPandas())
     for coluna in ("lat", "lon", "alt"):
         df[coluna] = pd.to_numeric(df[coluna].str.replace(",", "."), errors="coerce")
-    aneis = geo.carregar_contorno()
+    contornos = geo.carregar_contornos()
     df["data_fundacao"] = df.fundacao.map(data_de_fundacao)
-    df["em_mg"] = [bool(pd.notna(la) and pd.notna(lo) and geo.dentro(lo, la, aneis)) for la, lo in zip(df.lat, df.lon)]
+    df["em_uf"] = [bool(pd.notna(la) and pd.notna(lo) and uf in contornos and geo.na_uf(lo, la, contornos[uf]))
+                   for la, lo, uf in zip(df.lat, df.lon, df.uf)]
     df = df.join(df.arquivo.str.extract(COD_NOME_DO_ARQUIVO))
-    return df[["cod", "nome", "uf", "regiao", "lat", "lon", "alt", "data_fundacao", "em_mg", "ano", "arquivo"]]
+    return df[["cod", "nome", "uf", "regiao", "lat", "lon", "alt", "data_fundacao", "em_uf", "ano", "arquivo"]]
 
 
 def gravar_estacoes() -> None:
@@ -82,11 +83,11 @@ def conferir_estacoes() -> bool:
     tabela = spark.table(ESTACAO)
     arquivos = spark.table(BRONZE).select("arquivo").distinct().count()
     n, sem_fundacao = tabela.count(), tabela.filter(F.col("data_fundacao").isNull()).count()
-    fora = tabela.filter(~F.col("em_mg")).select("cod", "nome", "ano", "lat", "lon").orderBy("cod", "ano")
+    fora = tabela.filter(~F.col("em_uf")).select("cod", "nome", "uf", "ano", "lat", "lon").orderBy("cod", "ano")
     ok = n == arquivos and sem_fundacao == 0
     print(f"estacao_ano: {n} linhas para {arquivos} arquivos, {sem_fundacao} sem data de fundacao, "
-          f"{fora.count()} linhas com em_mg falso, {'OK' if ok else 'DIVERGE'}")
-    fora.show(truncate=False)
+          f"{fora.count()} linhas com em_uf falso, {'OK' if ok else 'DIVERGE'}")
+    fora.show(50, truncate=False)
     return ok
 
 
@@ -103,7 +104,7 @@ def preparar(ano: int):
     )
     medidas = [F.expr(numero(f"c{i:02d}")).alias(nome) for i, nome in zip(range(2, 19), COLUNAS_MEDIDA)]
     return (spark.table(BRONZE).filter((F.col("ano") == ano) & LINHA_DE_DADO)
-            .select(F.regexp_extract("arquivo", r"_MG_([A-Z]\d+)_", 1).alias("cod"), quando.alias("data_hora_utc"),
+            .select(F.regexp_extract("arquivo", r"^INMET_[A-Z]+_[A-Z]{2}_([A-Z]\d+)_", 1).alias("cod"), quando.alias("data_hora_utc"),
                     *medidas, "arquivo", "ano"))
 
 
