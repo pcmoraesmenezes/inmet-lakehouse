@@ -49,7 +49,7 @@ def gravar_dimensao(quadro: pd.DataFrame, esquema: StructType, tabela: str) -> N
 
 
 def montar_dim_estacao() -> pd.DataFrame:
-    estacoes = spark.table(ESTACAO_ANO).filter("em_mg").toPandas()
+    estacoes = spark.table(ESTACAO_ANO).filter("em_uf").toPandas()
     dimensao = versionar(estacoes)
     for cod, anos in estacoes.groupby("cod").ano:
         janelas = dimensao[dimensao.cod == cod]
@@ -82,8 +82,13 @@ def criar_tabela_fato() -> None:
               f"data_hora_utc TIMESTAMP, {medidas}, ano INT) USING DELTA")
 
 
+def estacoes_ano_validas():
+    return spark.table(ESTACAO_ANO).filter("em_uf").select("cod", "ano")
+
+
 def carregar_fato(ano: int) -> None:
-    silver = spark.table(MEDICAO).filter(F.col("ano") == ano).alias("s")
+    silver = (spark.table(MEDICAO).filter(F.col("ano") == ano)
+              .join(estacoes_ano_validas(), ["cod", "ano"], "left_semi").alias("s"))
     dimensao = F.broadcast(spark.table(DIM_ESTACAO).select("estacao_sk", "cod", "ano_inicio", "ano_fim")).alias("d")
     junta = (F.col("s.cod") == F.col("d.cod")) & F.col("s.ano").between(F.col("d.ano_inicio"), F.col("d.ano_fim"))
     fato = silver.join(dimensao, junta).select(
@@ -98,8 +103,7 @@ def carregar_fato(ano: int) -> None:
 
 
 def conferir_ano(ano: int) -> bool:
-    cods = spark.table(DIM_ESTACAO).select("cod").distinct()
-    silver = spark.table(MEDICAO).filter(F.col("ano") == ano).join(cods, "cod")
+    silver = spark.table(MEDICAO).filter(F.col("ano") == ano).join(estacoes_ano_validas(), ["cod", "ano"], "left_semi")
     fato = spark.table(FATO).filter(F.col("ano") == ano)
     na_prata, no_fato = silver.count(), fato.count()
     duplicadas = fato.groupBy("estacao_sk", "data_hora_utc").count().filter("count > 1").count()
@@ -108,7 +112,7 @@ def conferir_ano(ano: int) -> bool:
     contar = [F.count(c).alias(c) for c in COLUNAS_MEDIDA]
     medidas_iguais = silver.agg(*contar).first() == fato.agg(*contar).first()
     ok = na_prata == no_fato and duplicadas == 0 and sem_data == 0 and sem_hora == 0 and medidas_iguais
-    print(f"{ano}: prata em MG {na_prata}, fato {no_fato}, duplicadas {duplicadas}, sem data {sem_data}, "
+    print(f"{ano}: prata das estacoes validas {na_prata}, fato {no_fato}, duplicadas {duplicadas}, sem data {sem_data}, "
           f"sem hora {sem_hora}, contagens das medidas {'OK' if medidas_iguais else 'DIFEREM'}")
     return ok
 
