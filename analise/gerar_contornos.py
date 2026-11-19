@@ -8,16 +8,10 @@ import math
 import sys
 from pathlib import Path
 
+from analise.geo import distancia_ao_segmento
+
 SAIDA = Path(__file__).resolve().parent / "uf_contornos.geojson"
 TOLERANCIA_GRAUS = 0.01
-
-
-def distancia_ao_segmento(p: list[float], a: list[float], b: list[float]) -> float:
-    dx, dy = b[0] - a[0], b[1] - a[1]
-    if dx == dy == 0:
-        return math.dist(p, a)
-    t = max(0.0, min(1.0, ((p[0] - a[0]) * dx + (p[1] - a[1]) * dy) / (dx * dx + dy * dy)))
-    return math.dist(p, (a[0] + t * dx, a[1] + t * dy))
 
 
 def douglas_peucker(pontos: list[list[float]], tolerancia: float) -> list[list[float]]:

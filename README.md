@@ -70,3 +70,7 @@ Lakehouse: add the repository as a Git folder in Databricks, download the zips i
 - Every run reprocesses all years. The manifest sha256 is not stored in bronze, so an unchanged year cannot be skipped.
 - There is no scheduled job, no run log in the lakehouse (the PostgreSQL side has one), no automated tests, and the catalog and schema names are fixed in the code.
 - The quality checks run after the write, not before.
+
+## Decisions
+
+Decision records are in `docs/adr/`.
