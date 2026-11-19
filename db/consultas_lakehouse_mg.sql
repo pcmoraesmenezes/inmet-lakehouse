@@ -2,6 +2,13 @@
 
 SET TIME ZONE 'UTC';
 
+ SELECT estacao_sk, cod, ano_inicio, ano_fim
+  FROM workspace.inmet.gold_dim_estacao
+  WHERE cod = 'A502'
+  ORDER BY ano_inicio;
+
+
+
 -- Q1: As 20 estações com maior radiação média em um ano | consumidor: analista de recurso
 SELECT e.cod, e.nome, e.uf,
        AVG(CASE WHEN m.radiacao_kjm2 <= 5000 THEN m.radiacao_kjm2 END) AS radiacao_media_kjm2
